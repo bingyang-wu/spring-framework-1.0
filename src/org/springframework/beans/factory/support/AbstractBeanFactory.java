@@ -429,9 +429,15 @@ public abstract class AbstractBeanFactory implements ConfigurableBeanFactory, Hi
 	}
 
 	/**
+	 * 1、如果是FactoryBean并且beanName不是&开头,获取FactoryBean.getObject()返回的对象
+	 * 2、如果是FactoryBean并且beanName是以&开头，返回FactoryBean对象
+	 * 3、如果不是FactoryBean，以&开头报错
+	 * 4、如果不是FactoryBean，不以&开头返回对象
+	 * <p>
 	 * Get the object for the given shared bean, either the bean
 	 * instance itself or its created object in case of a FactoryBean.
-	 * @param name name that may include factory dereference prefix
+	 *
+	 * @param name         name that may include factory dereference prefix
 	 * @param beanInstance the shared bean instance
 	 * @return the singleton instance of the bean
 	 */
